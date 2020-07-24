@@ -5,21 +5,23 @@
 <div class="row mt-4">
     <div class="col">
         <form action="{% url 'add_todo'%}" class="form-inline" method="POST">
-            <h2>hello</h2>
-            {% csrf_token %}
-            <input type="text" class="form-control mb-2" placeholder="type smth...">
-            <input class="btn btn-primary" type="submit" value="Submit"> 
+            <input type="text" name="content" class="form-control mb-2" placeholder="type smth...">
+            <button type="button" class="btn btn-outline-primary">Submit!</button>
         </form>
     </div>
 </div>
 <div class="row mt-4">
         <div class="col">
             <ul class="list-group">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                <li class="list-group-item">Porta ac consectetur ac</li>
-                <li class="list-group-item">Vestibulum at eros</li>
+                {% for todo_item in todo_items  %}
+                    <li class="list-group-item">{{ todo_item.text }}
+                        <div class="float-right"> 
+                            <form action="delete_todo/{{todo_item.id}}/" action="post">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>
